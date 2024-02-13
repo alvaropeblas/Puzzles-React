@@ -1,14 +1,19 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu, notification } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { clearUser } from '../slices/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LogOut = () => {
+
     const dispatch = useDispatch();
     const handleLogout = () => {
         dispatch(clearUser());
+        notification.success({
+            message: `See you!`,
+            description: 'We hope you enjoy your experience.',
+        });
     };
 
     return (

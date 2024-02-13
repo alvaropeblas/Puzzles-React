@@ -40,7 +40,7 @@ export const userLogin = async (userCredentials) => {
         const response = await res.json();
         const user = await userByID(response.token);
 
-        return { user, token: response.token };
+        return { user, token: response.token, status: response.status };
     } catch (error) {
         throw new Error(`Error en el login de usuario ${error.message}`);
     }
@@ -58,7 +58,6 @@ export const userByID = async (userToken) => {
         if (!res.ok) {
             throw new Error(`Error en la solicitud ${res.status}`);
         }
-        sessionStorage.setItem('Token', userToken);
         const response = await res.json();
         return response.user;
     } catch (error) {

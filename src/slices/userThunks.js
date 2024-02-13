@@ -5,8 +5,9 @@ import { userLogin, userRegister } from '../service';
 export const useLogin = (userData) => {
     return async (dispatch) => {
         try {
-            const user = await userLogin(userData);
-            dispatch(setUser({ user: user.user, token: user.token }));
+            const response = await userLogin(userData);
+            dispatch(setUser({ user: response.user, token: response.token }));
+            return response.status
         } catch (error) {
             console.error('Login failed:', error.message);
         }

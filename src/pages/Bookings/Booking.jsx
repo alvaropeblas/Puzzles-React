@@ -2,6 +2,7 @@ import { Alert, Button, Calendar, Input } from 'antd';
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
 import Notification from '../../components/Notifications/NotificationBooking';
+import { useSelector } from 'react-redux';
 
 const Booking = () => {
     const [value, setValue] = useState(() => dayjs('2024-02-25'));
@@ -9,9 +10,9 @@ const Booking = () => {
     const [isVisible, setIsVisible] = useState(false);
     const [formIsVisible, setFormIsVisible] = useState(false);
     const [nombre, setNombre] = useState('');
+    const { user } = useSelector((state) => state.user)
 
     useEffect(() => {
-
         const timeoutId = setTimeout(() => {
             setIsVisible(true);
         }, 500);

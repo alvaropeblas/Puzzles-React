@@ -8,52 +8,38 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [password, setPassword] = useState();
-    const [email, setEmail] = useState();
     const { userAuth } = useSelector((state) => state.user);
 
-    const handleOnChangeEmail = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handleOnChangePass = (e) => {
-        setPassword(e.target.value);
-    };
-
-    const handleLogin = async () => {
+    const onFinish = async (values) => {
         const user = {
-            email: email,
-            password: password,
+            email: values.email,
+            password: values.password,
         };
-
         try {
-            await dispatch(useLogin(user));
+            dispatch(useLogin(user))
+                .then(response => {
+                    if (response) {
+                        navigate('/')
+                        notification.success({
+                            message: `Welcome back!`,
+                            description: 'We hope you enjoy your experience.',
+                        });
+                        return
+                    }
+                    notification.error({
+                        message: 'Login failed',
+                        description: 'Please check your email and password and try again.',
+                    });
+                });
 
-            if (userAuth) {
-                notification.success({
-                    message: `Welcome back!`,
-                    description: 'We hope you enjoy your experience.',
-                });
-                navigate('/');
-            } else {
-                notification.error({
-                    message: 'Login failed',
-                    description: 'Please check your email and password and try again.',
-                });
-            }
+
+
+
         } catch (error) {
             console.error('Error during login:', error);
         }
     };
-    useEffect(() => {
-        if (userAuth) {
-            notification.success({
-                message: `Welcome back!`,
-                description: 'We hope you enjoy your experience.',
-            });
-            navigate('/');
-        }
-    }, [userAuth])
+
 
     return (
         <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around flex-col'>
@@ -74,9 +60,12 @@ const Login = () => {
                 initialValues={{
                     remember: true,
                 }}
-                onFinish={() => { }}
-                onFinishFailed={() => { }}
-                autoComplete="off"
+                onFinish={onFinish}
+                onFinishFailed={(errorInfo) => {
+                    console.log('Failed:', errorInfo);
+
+                }}
+                autoComplete="on"
             >
                 <Form.Item
                     label="Email"
@@ -87,7 +76,6 @@ const Login = () => {
                             message: 'Please input your email!',
                         },
                     ]}
-                    onChange={handleOnChangeEmail}
                 >
                     <Input />
                 </Form.Item>
@@ -101,7 +89,6 @@ const Login = () => {
                             message: 'Please input your password!',
                         },
                     ]}
-                    onChange={handleOnChangePass}
                 >
                     <Input.Password />
                 </Form.Item>
@@ -123,7 +110,7 @@ const Login = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" className='bg-SECONDARY' htmlType="submit" onClick={handleLogin}>
+                    <Button type="primary" className='bg-SECONDARY' htmlType="submit" >
                         Login
                     </Button>
                 </Form.Item>
