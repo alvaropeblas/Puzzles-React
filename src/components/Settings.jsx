@@ -20,7 +20,7 @@ const items = [
 
 const Settings = () => (
     <Menu
-        className='w-[90%] mb-10 rounded font-lilita bg-SECONDARY'
+        className='lg:w-[90%] w-[35%]  lg:flex-col flex  lg:mb-10 mt-0.5  rounded font-lilita bg-SECONDARY'
         mode="vertical"
         style={{
             color: 'white'

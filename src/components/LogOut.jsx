@@ -18,7 +18,7 @@ const LogOut = () => {
 
     return (
         <Menu
-            className='w-[100%] mb-10 rounded font-lilita bg-SECONDARY'
+            className='lg:w-[100%] w-[10%] lg:mb-10 mt-2 rounded font-lilita bg-SECONDARY'
             mode="vertical"
             style={{
                 color: 'white'
@@ -26,13 +26,12 @@ const LogOut = () => {
         >
             <Menu.Item
                 key="logout"
-                icon={<LogoutOutlined />}
                 style={{
-                    color: 'white'
+                    color: 'white',
                 }}
             >
-                <Link to="/" onClick={handleLogout} className='text-white'>
-                    Log Out
+                <Link to="/" onClick={handleLogout} className='text-white '>
+                    <LogoutOutlined style={{ fontSize: '20px', margin: '10px' }} />
                 </Link>
             </Menu.Item>
         </Menu>

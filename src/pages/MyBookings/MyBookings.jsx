@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useObtenerReserva } from '../../slices/bookingsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Space, Table } from 'antd';
 
 const MyBookings = () => {
     const { token } = useSelector((state) => state.user);
@@ -12,16 +12,46 @@ const MyBookings = () => {
     useEffect(() => {
         dispatch(useObtenerReserva(token));
     }, []);
+    const columns = [
+        {
+            title: 'Fecha',
+            dataIndex: 'fecha',
+            key: 'fecha',
+        },
+        {
+            title: 'Hora',
+            dataIndex: 'hora',
+            key: 'hora',
+        },
+        {
+            title: 'Menu',
+            dataIndex: 'menu',
+            key: 'menu',
+        },
+        {
+            title: 'Nº Personas',
+            dataIndex: 'n_personas',
+            key: 'n_personas',
+        },
+
+        {
+            title: 'Action',
+            key: 'action',
+            render: () => (
+                <Space size="middle">
+                    <Button>Cancelar</Button>
+                </Space>
+            ),
+        },
+    ];
+
 
     return (
         <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around '>
-            {reservas && reservas.length > 0 ? (
-                reservas.map((reserva) => (
-                    <div key={reserva.id}>
-                        <p>{reserva.fecha}</p>
-                        {/* Add other reserva details as needed */}
-                    </div>
-                ))
+            {reservas && reservas?.length > 0 ? (
+
+                <Table columns={columns} dataSource={reservas} />
+
             ) : (
                 <div className=''>
                     <p className='mb-8'>No bookings available</p>
