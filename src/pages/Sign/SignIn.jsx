@@ -19,6 +19,8 @@ const SignIn = () => {
     const [password, setPassword] = useState()
     const [email, setEmail] = useState()
     const [nombre, setNombre] = useState()
+    const [apellidos, setApellidos] = useState()
+
 
     const handleOnChangeName = (e) => {
         setNombre(e.target.value)
@@ -29,9 +31,13 @@ const SignIn = () => {
     const handleOnChangePass = (e) => {
         setPassword(e.target.value)
     }
+    const handleOnChangeApellidos = (e) => {
+        setApellidos(e.target.value)
+    }
     const handleRegister = async () => {
         const user = {
             name: nombre,
+            apellidos: apellidos,
             email: email,
             password: password
         }
@@ -75,6 +81,19 @@ const SignIn = () => {
                         },
                     ]}
                     onChange={handleOnChangeName}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    label="Apellidos"
+                    name="apellidos"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your apellidosF!',
+                        },
+                    ]}
+                    onChange={handleOnChangeApellidos}
                 >
                     <Input />
                 </Form.Item>

@@ -32,6 +32,7 @@ const LogOut = () => {
             >
                 <Link to="/" onClick={handleLogout} className='text-white '>
                     <LogoutOutlined style={{ fontSize: '20px', margin: '10px' }} />
+                    Exit
                 </Link>
             </Menu.Item>
         </Menu>

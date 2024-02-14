@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react';
-import { useObtenerReserva } from '../../slices/bookingsThunks';
+import { useBorrarReserva, useObtenerReserva } from '../../slices/bookingsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Space, Table } from 'antd';
+import { Button, Popconfirm, Space, Table } from 'antd';
 
 const MyBookings = () => {
     const { token } = useSelector((state) => state.user);
     const { reservas } = useSelector((state) => state.reservas);
     const dispatch = useDispatch();
+    const handleBorrarReserva = (idReserva) => {
+        dispatch(useBorrarReserva(token, idReserva))
+        dispatch(useObtenerReserva(token));
+    }
 
     useEffect(() => {
         dispatch(useObtenerReserva(token));
@@ -37,9 +41,16 @@ const MyBookings = () => {
         {
             title: 'Action',
             key: 'action',
-            render: () => (
+            render: (record) => (
                 <Space size="middle">
-                    <Button>Cancelar</Button>
+                    <Popconfirm
+                        title="¿Estás seguro de cancelar esta reserva?"
+                        onConfirm={() => handleBorrarReserva(record.id)}
+                        okText="Sí"
+                        cancelText="No"
+                    >
+                        <Button type="danger">Cancelar</Button>
+                    </Popconfirm>
                 </Space>
             ),
         },

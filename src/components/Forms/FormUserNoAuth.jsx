@@ -2,25 +2,29 @@ import React from 'react'
 import { Alert, Button, Calendar, Form, Input, Select, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useCrearReservaOut } from '../../slices/bookingsThunks';
 
 const FormUserNoAuth = ({ selectedValue }) => {
-    const { user, token } = useSelector((state) => state.user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onFinish = async (values) => {
         const reserva = {
+            name: values.name,
+            apellidos: values.apellidos,
+            email: values.email,
             n_personas: values.n_personas,
+            hora: values.hora,
             menu: values.menu,
             alergias: values.alergias,
             fecha: selectedValue.format('YYYY-MM-DD'),
         };
         try {
-            dispatch(useCrearReserva(token, reserva))
+            dispatch(useCrearReservaOut(reserva))
                 .then(response => {
                     if (response) {
                         notification.success({
                             message: 'Reserva Exitosa',
-                            description: `¡${user.name} has realizado una reserva para el ${selectedValue.format('YYYY-MM-DD')} a las ${values.hora}!`,
+                            description: `¡${values.name} has realizado una reserva para el ${selectedValue.format('YYYY-MM-DD')} a las ${values.hora}!`,
                             placement: 'bottomRight',
                         });
                         navigate('/')
@@ -122,6 +126,30 @@ const FormUserNoAuth = ({ selectedValue }) => {
                     {
                         required: true,
                         message: 'Please input your cvv!',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                label="Nº Personas"
+                name="n_personas"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your personas!',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                label="Alergias"
+                name="alergias"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input your alergias!',
                     },
                 ]}
             >
