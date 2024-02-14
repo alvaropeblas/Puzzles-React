@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_REGISTER, USER_BY_ID } from './routes';
+import { USER_LOGIN, USER_REGISTER, USER_BY_ID, GET_RESERVA, CREATE_RESERVA, DELETE_RESERVA } from './routes';
 
 export const userRegister = async (userCredentials) => {
     try {
@@ -62,5 +62,63 @@ export const userByID = async (userToken) => {
         return response.user;
     } catch (error) {
         throw new Error(`Error al obtener información del usuario ${error.message}`);
+    }
+};
+
+
+export const crearReserva = async (userToken, reservaData) => {
+    try {
+        const res = await fetch(CREATE_RESERVA, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`,
+            },
+            body: JSON.stringify(reservaData)
+        });
+        if (!res.ok) {
+            throw new Error(`Error en la solicitud ${res.status}`);
+        }
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        throw new Error(`Error al crear la reserva ${error.message}`);
+    }
+};
+
+export const obtenerReservas = async (userToken) => {
+    try {
+        const res = await fetch(GET_RESERVA, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`,
+            },
+        });
+        if (!res.ok) {
+            throw new Error(`Error en la solicitud ${res.status}`);
+        }
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        throw new Error(`Error al crear la reserva ${error.message}`);
+    }
+};
+export const borrarReserva = async (userToken, idReserva) => {
+    try {
+        const res = await fetch(DELETE_RESERVA + idReserva, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`,
+            },
+        });
+        if (!res.ok) {
+            throw new Error(`Error en la solicitud ${res.status}`);
+        }
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        throw new Error(`Error al crear la reserva ${error.message}`);
     }
 };
