@@ -1,11 +1,12 @@
 import React from 'react'
-import {  Button, Form, Input, Select, notification } from 'antd';
+import { Button, Form, Input, Select, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCrearReserva } from '../../slices/bookingsThunks';
 
 const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
     const { user, token } = useSelector((state) => state.user)
+    const menu = useSelector((state) => state.menu.menu)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onFinish = async (values) => {
@@ -64,7 +65,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your tarjeta!',
+                        message: 'Por favor, ingrese su tarjeta.',
                     },
                 ]}
             >
@@ -77,7 +78,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your fecha!',
+                        message: 'Por favor, ingrese su fecha de vencimiento.',
                     },
                 ]}
             >
@@ -90,7 +91,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your cvv!',
+                        message: 'Por favor, ingrese su CVV.',
                     },
                 ]}
             >
@@ -103,7 +104,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your comensales!',
+                        message: 'Por favor, ingrese el número de comensales.',
                     },
                 ]}
             >
@@ -111,17 +112,18 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
             </Form.Item>
             <Form.Item
                 label="Menu"
-                required={true}
+                initialValue={menu}
                 name="menu"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your menu!',
+                        message: 'Por favor, seleccione un menú.',
                     },
                 ]}
             >
                 <Select
-                    defaultValue="Basic"
+                    key={menu}
+                    defaultValue={menu}
                     id='menu'
                     style={{ width: 160 }}
                     options={[
@@ -138,7 +140,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your hora!',
+                        message: 'Por favor, seleccione una hora.',
                     },
                 ]}
             >
@@ -156,7 +158,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your alergias!',
+                        message: 'Por favor, ingrese sus alergias.',
                     },
                 ]}
             >

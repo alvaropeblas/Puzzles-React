@@ -20,7 +20,7 @@ const Booking = () => {
         dispatch(useObtenerFechas())
         const timeoutId = setTimeout(() => {
             setIsVisible(true);
-        }, 500);
+        }, 0);
 
         return () => clearTimeout(timeoutId);
     }, []);
@@ -58,13 +58,18 @@ const Booking = () => {
     };
 
     return (
-        <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around '>
-            <div className={`w-[30%] transition-transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-x-[-2em] opacity-0'}`}>
+        <div className='bg-TERCIARY h-screen w-screen flex items-center justify-center'>
+            <div className={`mb-4 text-center text-white ${isVisible && !formIsVisible ? '' : 'hidden'}`}>
+                <p className='text-black font-lilita font-bold'>Seleccione la fecha deseada</p>
+            </div>
+            <div className='ml-10 w-[30%] transition-transform duration-1000'>
                 <Calendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} fullscreen={false} disabledDate={disabledDate} />
             </div>
-            <div className={`w-[20%] transition-transform ${formIsVisible ? 'translate-y-0 opacity-100' : 'translate-x-[-4em] opacity-0'}`}>
-                {user ? <FormUserAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} /> : <FormUserNoAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} />}
-            </div>
+            {formIsVisible && (
+                <div className='w-[40%] mt-10'>
+                    {user ? <FormUserAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} /> : <FormUserNoAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} />}
+                </div>
+            )}
         </div>
     )
 }

@@ -1,12 +1,14 @@
 import React from 'react'
-import {  Button, Form, Input, Select, notification } from 'antd';
-import { useDispatch } from 'react-redux';
+import { Button, Form, Input, Select, notification } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCrearReservaOut } from '../../slices/bookingsThunks';
 
 const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { menu } = useSelector((state) => state.menu)
+
     const onFinish = async (values) => {
         const reserva = {
             name: values.name,
@@ -54,8 +56,10 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
             }}
             onFinish={onFinish}
             onFinishFailed={(errorInfo) => {
-                console.log('Failed:', errorInfo);
-
+                notification.error({
+                    message: 'Introduzca los datos correctamente',
+                    placement: 'topLeft',
+                })
             }}
             autoComplete="on"
         >
@@ -65,7 +69,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your name!',
+                        message: 'Por favor, ingrese su nombre.',
                     },
                 ]}
             >
@@ -77,7 +81,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your apellidos!',
+                        message: 'Por favor, ingrese sus apellidos.',
                     },
                 ]}
             >
@@ -89,7 +93,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your email!',
+                        message: 'Por favor, ingrese su correo electrónico.',
                     },
                 ]}
             >
@@ -101,7 +105,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your tarjeta!',
+                        message: 'Por favor, ingrese su tarjeta.',
                     },
                 ]}
             >
@@ -113,7 +117,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your fecha!',
+                        message: 'Por favor, ingrese la fecha de vencimiento.',
                     },
                 ]}
             >
@@ -125,7 +129,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your cvv!',
+                        message: 'Por favor, ingrese el CVV.',
                     },
                 ]}
             >
@@ -137,7 +141,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your personas!',
+                        message: 'Por favor, ingrese el número de personas.',
                     },
                 ]}
             >
@@ -149,7 +153,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your alergias!',
+                        message: 'Por favor, ingrese sus alergias.',
                     },
                 ]}
             >
@@ -157,17 +161,18 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
             </Form.Item>
             <Form.Item
                 label="Menu"
+                initialValue={menu}
                 name="menu"
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your menu!',
+                        message: 'Por favor, seleccione un menú.',
                     },
                 ]}
             >
                 <Select
-                    defaultValue="Basic"
                     id='menu'
+                    defaultValue={menu}
                     style={{ width: 160 }}
                     options={[
                         { value: 'Basic', label: 'Basic' },
@@ -182,7 +187,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please input your hora!',
+                        message: 'Por favor, seleccione una hora.',
                     },
                 ]}
             >

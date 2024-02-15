@@ -11,8 +11,8 @@ const LogOut = () => {
     const handleLogout = () => {
         dispatch(clearUser());
         notification.success({
-            message: `See you!`,
-            description: 'We hope you enjoy your experience.',
+            message: `Hasta pronto!`,
+            description: 'Esperamos que haya disfrutado de la experiencia.',
         });
     };
 
