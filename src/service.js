@@ -161,12 +161,13 @@ export const borrarReserva = async (userToken, idReserva) => {
     }
 };
 
-export const crearTarjeta = async (dataTarjeta) => {
+export const crearTarjeta = async (userToken, dataTarjeta) => {
     try {
         const res = await fetch(CREATE_TARJETA, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`,
             },
             body: JSON.stringify(dataTarjeta)
         });
