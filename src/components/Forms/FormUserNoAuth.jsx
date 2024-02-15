@@ -166,7 +166,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                 ]}
             >
                 <Select
-                    defaultValue="basic"
+                    defaultValue="Basic"
                     id='menu'
                     style={{ width: 160 }}
                     options={[
