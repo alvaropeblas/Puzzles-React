@@ -3,7 +3,7 @@ import { Menu, notification } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import { useDispatch } from 'react-redux';
 import { clearUser } from '../slices/userSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const LogOut = () => {
 
@@ -31,7 +31,7 @@ const LogOut = () => {
                     fontSize: '16px',
                 }}
             >
-                <Link to="/" onClick={handleLogout} className='text-white '>
+                <Link to="/puzzles-front/" onClick={handleLogout} className='text-white '>
                     <LogoutOutlined style={{ fontSize: '20px', margin: '10px' }} />
                     Exit
                 </Link>

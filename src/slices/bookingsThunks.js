@@ -38,8 +38,7 @@ export const useBorrarReserva = (token, idReserva) => {
     return async (dispatch) => {
         try {
             const response = await borrarReserva(token, idReserva);
-/*             dispatch(setReserva(response));
- */            return response
+           return response
         } catch (error) {
             console.error('Request reserva failed:', error.message);
         }

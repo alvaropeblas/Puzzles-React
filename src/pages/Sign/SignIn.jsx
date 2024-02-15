@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Button, Form, Input, notification } from 'antd';
-import logo from '../../assets/Logo.png';
+import logo from '../../../public/images/Logo.png';
 import { useRegister } from '../../slices/userThunks';
 import { useDispatch } from 'react-redux';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const onFinish = (values) => {
     console.log('Success:', values);
@@ -12,8 +12,6 @@ const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 const SignIn = () => {
-    const [api, contextHolder] = notification.useNotification();
-
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const [password, setPassword] = useState()
@@ -46,7 +44,7 @@ const SignIn = () => {
             message: 'Registro Exitoso',
             description: 'Tu cuenta ha sido registrada correctamente.',
         });
-        navigate('/')
+        navigate('/puzzles-front/')
     }
     return (
         <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around flex-col'>

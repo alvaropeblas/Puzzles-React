@@ -66,7 +66,7 @@ const MyBookings = () => {
             ) : (
                 <div className=''>
                     <p className='mb-8'>No bookings available</p>
-                    <Link to='/booking' >
+                    <Link to="/puzzles-front/booking" >
                         <Button type="primary" className='bg-SECONDARY'>
                             Hacer una reserva
                         </Button>

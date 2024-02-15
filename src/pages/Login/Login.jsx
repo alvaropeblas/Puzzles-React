@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button, Checkbox, Form, Input, notification } from 'antd';
-import logo from '../../assets/Logo.png';
+import logo from '../../../public/images/Logo.png'
 import { useLogin } from '../../slices/userThunks';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { userAuth } = useSelector((state) => state.user);
 
     const onFinish = async (values) => {
         const user = {
@@ -19,7 +18,7 @@ const Login = () => {
             dispatch(useLogin(user))
                 .then(response => {
                     if (response) {
-                        navigate('/')
+                        navigate('/puzzles-front/')
                         notification.success({
                             message: `Welcome back!`,
                             description: 'We hope you enjoy your experience.',

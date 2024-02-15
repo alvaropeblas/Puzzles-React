@@ -36,27 +36,27 @@ const router = createBrowserRouter([
   {
     element: <AppLayout />,
     children: [{
-      path: "/",
+      path: "/puzzles-front/",
       element: <Home />,
     },
     {
-      path: "/menu",
+      path: "/puzzles-front/menu",
       element: <Menu />,
     },
     {
-      path: "/booking",
+      path: "/puzzles-front/booking",
       element: <Booking />,
     },
     {
-      path: "/login",
+      path: "/puzzles-front/login",
       element: <Login />,
     },
     {
-      path: "/sign",
+      path: "/puzzles-front/sign",
       element: <SignIn />,
     },
     {
-      path: "/reservas",
+      path: "/puzzles-front/reservas",
       element: <MyBookings />,
     },
     ]

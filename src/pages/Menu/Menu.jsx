@@ -7,7 +7,7 @@ const Menu = () => {
         <div className='bg-TERCIARY h-screen w-screen flex justify-around items-center'>
             <div>
                 <p>Menu</p>
-                <Link to='/booking'>
+                <Link to="/puzzles-front/booking">
                     <Button type="primary" className='bg-SECONDARY'>
                         Reservar
                     </Button>
@@ -15,7 +15,7 @@ const Menu = () => {
             </div>
             <div>
                 <p>Menu</p>
-                <Link to='/booking'>
+                <Link to="/puzzles-front/booking">
                     <Button type="primary" className='bg-SECONDARY'>
                         Reservar
                     </Button>
@@ -23,7 +23,7 @@ const Menu = () => {
             </div>
             <div>
                 <p>Menu</p>
-                <Link to='/booking'>
+                <Link to="/puzzles-front/booking">
                     <Button type="primary" className='bg-SECONDARY'>
                         Reservar
                     </Button>

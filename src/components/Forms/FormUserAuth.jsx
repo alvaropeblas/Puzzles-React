@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Button, Calendar, Form, Input, Select, notification } from 'antd';
+import {  Button, Form, Input, Select, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCrearReserva } from '../../slices/bookingsThunks';
@@ -25,7 +25,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                             description: `¡${user.name} has realizado una reserva para el ${selectedValue.format('YYYY-MM-DD')} a las ${values.hora}!`,
                             placement: 'bottomRight',
                         });
-                        navigate('/')
+                        navigate('/puzzles-front/')
                         return
                     }
                     notification.error({

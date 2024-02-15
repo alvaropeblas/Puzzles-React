@@ -1,4 +1,3 @@
-// fechaSlice.js
 
 import { createSlice } from '@reduxjs/toolkit';
 
@@ -10,7 +9,6 @@ export const fechaSlice = createSlice({
     },
     reducers: {
         setFechas: (state, action) => {
-            console.log(action.payload);
             state.fechasDisponibles = action.payload;
         },
         setHoras: (state, action) => {

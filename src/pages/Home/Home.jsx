@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Button, DatePicker } from 'antd'
-import logo from '../../assets/Logo.png'
+import { Button } from 'antd'
+import logo from '../../../public/images/Logo.png'
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
 function Home() {
     const [isVisible, setIsVisible] = useState(false);
-    const user = useSelector((state) => state.user.user);
-    const token = useSelector((state) => state.user.token);
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setIsVisible(true);
@@ -26,8 +22,8 @@ function Home() {
                         <h1 className={`text-4xl font-lilita transition-transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[-2em] opacity-0'}`}>R<label className='text-BUTTON_COLOR'>e</label>st<label className='text-BUTTON_COLOR'>a</label>ur<label className='text-BUTTON_COLOR'>a</label>nt</h1>
                     </div>
 
-                    <Link to='/booking'>
-                        <Button type="primary" className='bg-SECONDARY'>
+                    <Link to="/puzzles-front/booking">
+                        <Button type="primary" className='bg-SECONDARY ml-8'>
                             Hacer una reserva
                         </Button>
                     </Link>

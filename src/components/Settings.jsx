@@ -1,5 +1,4 @@
 import React from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
 
@@ -35,12 +34,12 @@ const Settings = () => (
                     <Menu.SubMenu key={item.key} title={item.label} icon={item.icon}>
                         {item.children.map(child => (
                             <Menu.Item key={child.key} icon={child.icon} >
-                                <Link to={`/${child.key}`} ></Link>
+                                <Link to={`/puzzles-front/${child.key}`} ></Link>
                             </Menu.Item>
                         ))}
                     </Menu.SubMenu>
                 ) : (
-                    <Link to={`/${item.key}`}>{item.label}</Link>
+                    <Link to={`/puzzles-front/${item.key}`}>{item.label}</Link>
                 )}
             </Menu.Item>
         ))}
