@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCrearReserva } from '../../slices/bookingsThunks';
 
-const FormUserAuth = ({ selectedValue }) => {
+const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
     const { user, token } = useSelector((state) => state.user)
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -60,6 +60,7 @@ const FormUserAuth = ({ selectedValue }) => {
             <Form.Item
                 label="Tarjeta"
                 name="tarjeta"
+                required={true}
                 rules={[
                     {
                         required: true,
@@ -71,6 +72,7 @@ const FormUserAuth = ({ selectedValue }) => {
             </Form.Item>
             <Form.Item
                 label="Fecha venc."
+                required={true}
                 name="fecha_vencimiento"
                 rules={[
                     {
@@ -83,6 +85,7 @@ const FormUserAuth = ({ selectedValue }) => {
             </Form.Item>
             <Form.Item
                 label="cvv"
+                required={true}
                 name="cvv"
                 rules={[
                     {
@@ -95,6 +98,7 @@ const FormUserAuth = ({ selectedValue }) => {
             </Form.Item>
             <Form.Item
                 label="Comensales"
+                required={true}
                 name="n_personas"
                 rules={[
                     {
@@ -107,6 +111,7 @@ const FormUserAuth = ({ selectedValue }) => {
             </Form.Item>
             <Form.Item
                 label="Menu"
+                required={true}
                 name="menu"
                 rules={[
                     {
@@ -128,6 +133,7 @@ const FormUserAuth = ({ selectedValue }) => {
             </Form.Item>
             <Form.Item
                 label="Hora"
+                required={true}
                 name="hora"
                 rules={[
                     {
@@ -136,23 +142,13 @@ const FormUserAuth = ({ selectedValue }) => {
                     },
                 ]}
             >
-                <Select
-                    defaultValue="10:00"
-                    id='hora'
-                    style={{ width: 160 }}
-                    options={[
-                        { value: '13:00', label: '13:00' },
-                        { value: '14:00', label: '14:00' },
-                        { value: '15:00', label: '15:00' },
-                        { value: '16:00', label: '16:00' },
-                        { value: '17:00', label: '17:00' },
-                        { value: '18:00', label: '18:00' },
-                        { value: '19:00', label: '19:00' },
-                        { value: '20:00', label: '20:00' },
-                        { value: '21:00', label: '21:00' },
-                        { value: '22:00', label: '22:00' },
-                    ]}
-                />
+                <Select placeholder="Selecciona una hora" style={{ width: 160 }} >
+                    {horasDisponibles.map((hora) => (
+                        <Select.Option key={hora} value={hora}>
+                            {hora}
+                        </Select.Option>
+                    ))}
+                </Select>
             </Form.Item>
             <Form.Item
                 label="Alergias"

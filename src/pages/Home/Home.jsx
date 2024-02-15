@@ -11,7 +11,7 @@ function Home() {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             setIsVisible(true);
-        }, 1000);
+        }, 800);
         return () => clearTimeout(timeoutId);
     }, []);
     return (

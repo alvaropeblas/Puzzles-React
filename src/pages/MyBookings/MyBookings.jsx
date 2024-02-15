@@ -39,8 +39,8 @@ const MyBookings = () => {
         },
 
         {
-            title: 'Action',
-            key: 'action',
+            title: 'Cancelar',
+            key: 'cancelar',
             render: (record) => (
                 <Space size="middle">
                     <Popconfirm
@@ -49,7 +49,7 @@ const MyBookings = () => {
                         okText="Sí"
                         cancelText="No"
                     >
-                        <Button type="danger">Cancelar</Button>
+                        <Button >Cancelar</Button>
                     </Popconfirm>
                 </Space>
             ),

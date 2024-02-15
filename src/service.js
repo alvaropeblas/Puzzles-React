@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_REGISTER, USER_BY_ID, GET_RESERVA, CREATE_RESERVA, DELETE_RESERVA, CREATE_RESERVA_OUT } from './routes';
+import { USER_LOGIN, USER_REGISTER, USER_BY_ID, GET_RESERVA, CREATE_RESERVA, DELETE_RESERVA, CREATE_RESERVA_OUT, GET_FECHAS } from './routes';
 
 export const userRegister = async (userCredentials) => {
     try {
@@ -94,6 +94,25 @@ export const crearReservaOut = async (reservaData) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(reservaData)
+        });
+        if (!res.ok) {
+            throw new Error(`Error en la solicitud ${res.status}`);
+        }
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        throw new Error(`Error al crear la reserva ${error.message}`);
+    }
+};
+
+
+export const obtenerFechas = async () => {
+    try {
+        const res = await fetch(GET_FECHAS, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
         });
         if (!res.ok) {
             throw new Error(`Error en la solicitud ${res.status}`);

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCrearReservaOut } from '../../slices/bookingsThunks';
 
-const FormUserNoAuth = ({ selectedValue }) => {
+const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onFinish = async (values) => {
@@ -186,23 +186,13 @@ const FormUserNoAuth = ({ selectedValue }) => {
                     },
                 ]}
             >
-                <Select
-                    defaultValue="10:00"
-                    id='hora'
-                    style={{ width: 160 }}
-                    options={[
-                        { value: '13:00', label: '13:00' },
-                        { value: '14:00', label: '14:00' },
-                        { value: '15:00', label: '15:00' },
-                        { value: '16:00', label: '16:00' },
-                        { value: '17:00', label: '17:00' },
-                        { value: '18:00', label: '18:00' },
-                        { value: '19:00', label: '19:00' },
-                        { value: '20:00', label: '20:00' },
-                        { value: '21:00', label: '21:00' },
-                        { value: '22:00', label: '22:00' },
-                    ]}
-                />
+                <Select placeholder="Selecciona una hora" style={{ width: 160 }} >
+                    {horasDisponibles.map((hora) => (
+                        <Select.Option key={hora} value={hora}>
+                            {hora}
+                        </Select.Option>
+                    ))}
+                </Select>
             </Form.Item>
 
             <Form.Item

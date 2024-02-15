@@ -18,16 +18,17 @@ const LogOut = () => {
 
     return (
         <Menu
-            className='lg:w-[100%] w-[10%] lg:mb-10 mt-2 rounded font-lilita bg-SECONDARY'
+            className='lg:w-[100%] w-[10%] lg:mb-10  mt-2 rounded font-lilita bg-SECONDARY'
             mode="vertical"
             style={{
-                color: 'white'
+                color: 'red'
             }}
         >
             <Menu.Item
                 key="logout"
                 style={{
                     color: 'white',
+                    fontSize: '16px',
                 }}
             >
                 <Link to="/" onClick={handleLogout} className='text-white '>
