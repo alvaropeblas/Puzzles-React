@@ -43,13 +43,14 @@ const Booking = () => {
     };
     const disabledDate = (current) => {
         if (!fechasDisponibles) {
-            return false; 
+            return true;
         }
+        const currentFormatted = dayjs(current).format('YYYY-MM-DD');
         const fechasDisponiblesEnFecha = fechasDisponibles.filter((fecha) =>
-            dayjs(fecha.fecha).isSame(current, 'day')
+            fecha.fecha === currentFormatted
         );
         if (fechasDisponiblesEnFecha.length === 0) {
-            return false;
+            return true;
         }
         const horasDisponiblesEnFecha = fechasDisponiblesEnFecha.map((fecha) => fecha.hora);
         const alMenosUnaHoraDisponible = horasDisponiblesEnFecha.some((hora) =>
