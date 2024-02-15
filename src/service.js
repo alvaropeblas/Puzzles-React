@@ -1,4 +1,4 @@
-import { USER_LOGIN, USER_REGISTER, USER_BY_ID, GET_RESERVA, CREATE_RESERVA, DELETE_RESERVA, CREATE_RESERVA_OUT, GET_FECHAS } from './routes';
+import { USER_LOGIN, USER_REGISTER, USER_BY_ID, GET_RESERVA, CREATE_RESERVA, DELETE_RESERVA, CREATE_RESERVA_OUT, GET_FECHAS, CREATE_TARJETA, GET_TARJETA } from './routes';
 
 export const userRegister = async (userCredentials) => {
     try {
@@ -120,7 +120,7 @@ export const obtenerFechas = async () => {
         const response = await res.json();
         return response;
     } catch (error) {
-        throw new Error(`Error al crear la reserva ${error.message}`);
+        throw new Error(`Error al obtener la fecha ${error.message}`);
     }
 };
 
@@ -139,7 +139,7 @@ export const obtenerReservas = async (userToken) => {
         const response = await res.json();
         return response;
     } catch (error) {
-        throw new Error(`Error al crear la reserva ${error.message}`);
+        throw new Error(`Error al obtener la reserva ${error.message}`);
     }
 };
 export const borrarReserva = async (userToken, idReserva) => {
@@ -157,6 +157,44 @@ export const borrarReserva = async (userToken, idReserva) => {
         const response = await res.json();
         return response;
     } catch (error) {
-        throw new Error(`Error al crear la reserva ${error.message}`);
+        throw new Error(`Error al borrar la reserva ${error.message}`);
+    }
+};
+
+export const crearTarjeta = async (dataTarjeta) => {
+    try {
+        const res = await fetch(CREATE_TARJETA, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataTarjeta)
+        });
+        if (!res.ok) {
+            throw new Error(`Error en la solicitud ${res.status}`);
+        }
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        throw new Error(`Error al crear la tarjeta ${error.message}`);
+    }
+};
+
+export const obtenerTarjetas = async (userToken) => {
+    try {
+        const res = await fetch(GET_TARJETA, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`,
+            },
+        });
+        if (!res.ok) {
+            throw new Error(`Error en la solicitud ${res.status}`);
+        }
+        const response = await res.json();
+        return response;
+    } catch (error) {
+        throw new Error(`Error al obtener la reserva ${error.message}`);
     }
 };

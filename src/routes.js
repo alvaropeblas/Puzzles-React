@@ -8,6 +8,10 @@ export const CREATE_RESERVA_OUT = `${API_ORIGIN}/crearReservaOut`
 export const GET_RESERVA = `${API_ORIGIN}/misReservas`
 export const DELETE_RESERVA = `${API_ORIGIN}/eliminarReserva/`
 export const GET_FECHAS = `${API_ORIGIN}/fechas`
+export const CREATE_TARJETA = `${API_ORIGIN}/crearTarjeta`
+export const GET_TARJETA = `${API_ORIGIN}/misTarjetas`
+
+
 
 
 
