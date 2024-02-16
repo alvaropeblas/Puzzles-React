@@ -7,8 +7,8 @@ import FormUserNoAuth from '../../components/Forms/FormUserNoAuth';
 import { useObtenerFechas } from '../../slices/fechaThunk';
 const Booking = () => {
     const dispatch = useDispatch()
-    const [value, setValue] = useState(() => dayjs('2024-02-25'));
-    const [selectedValue, setSelectedValue] = useState(() => dayjs('2024-02-25'));
+    const [value, setValue] = useState(() => dayjs());
+    const [selectedValue, setSelectedValue] = useState(() => dayjs());
     const [isVisible, setIsVisible] = useState(false);
     const [formIsVisible, setFormIsVisible] = useState(false);
     const { user, token } = useSelector((state) => state.user)
@@ -67,7 +67,7 @@ const Booking = () => {
                 {loading ? (
                     
                     <div className=' ml-16 w-[400px] h-[300px] bg-slate-400 animate-pulse  rounded'>
-                        
+
                     </div>
                 ) : (
                     <Calendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} fullscreen={false} disabledDate={disabledDate} />

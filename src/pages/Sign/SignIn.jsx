@@ -12,6 +12,8 @@ const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 const SignIn = () => {
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const [password, setPassword] = useState()
@@ -33,16 +35,19 @@ const SignIn = () => {
         setApellidos(e.target.value)
     }
     const handleRegister = async () => {
+        setLoading(true)
         const user = {
             name: nombre,
             apellidos: apellidos,
             email: email,
             password: password
         }
-        await dispatch(useRegister(user))
+        await dispatch(useRegister(user)).finally(() => {
+            setLoading(false);
+        });
         notification.success({
-            message: 'Registro Exitoso',
-            description: 'Tu cuenta ha sido registrada correctamente.',
+            message: 'Registrado!',
+            description: 'Bienvenido a Puzzles.',
         });
         navigate('/puzzles-front/')
     }
@@ -128,7 +133,7 @@ const SignIn = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" className='bg-SECONDARY' htmlType="submit" onClick={handleRegister}>
+                    <Button type="primary" className='bg-SECONDARY' htmlType="submit" onClick={handleRegister}  loading={loading}>
                         Sign in
                     </Button>
                 </Form.Item>
