@@ -11,6 +11,11 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
     const [saveTarjeta, setSaveTarjeta] = useState()
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [selectedTarjeta, setSelectedTarjeta] = useState({
+        num: '0000 0000 0000 0000',
+        f_ven: '00/00',
+        cvv: '000'
+    });
     const onFinish = async (values) => {
         const reserva = {
             n_personas: values.n_personas,
@@ -74,9 +79,37 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
             }}
             autoComplete="on"
         >
+            {tarjetas &&
+                <Form.Item
+                    label="Tarjetas Guardadas"
+                    name="tarjetasGuardadas"
+                >
+                    <Select
+                        style={{ width: '100%' }}
+                        placeholder="Selecciona una tarjeta"
+                        onChange={(value) => {
+                            const selectedCard = tarjetas.find((card) => card.id === value);
+                            setSelectedTarjeta({
+                                num: `${selectedCard.n_tarjeta}`,
+                                f_ven: `${selectedCard.f_vencimiento}`,
+                                cvv: `${selectedCard.cvv}`
+                            });
+                            setSaveTarjeta(false);
+                        }}
+                    >
+                        {tarjetas?.map((tarjeta) => (
+                            <Select.Option key={tarjeta.id} value={tarjeta.id}>
+                                {tarjeta.n_tarjeta}
+                            </Select.Option>
+                        ))}
+                    </Select>
+                </Form.Item>
+            }
             <Form.Item
                 label="Tarjeta"
                 name="tarjeta"
+                initialValue={selectedTarjeta.num}
+                defaultValue={selectedTarjeta.num}
                 required={true}
                 rules={[
                     {
@@ -85,7 +118,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     },
                 ]}
             >
-                <Input />
+                <Input defaultValue={selectedTarjeta.num} />
             </Form.Item>
             <Form.Item
                 name="remember"
@@ -107,7 +140,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     },
                 ]}
             >
-                <Input />
+                <Input defaultValue={selectedTarjeta.f_ven} />
             </Form.Item>
             <Form.Item
                 label="cvv"
@@ -120,7 +153,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     },
                 ]}
             >
-                <Input />
+                <Input defaultValue={selectedTarjeta.cvv} />
             </Form.Item>
             <Form.Item
                 label="Comensales"
