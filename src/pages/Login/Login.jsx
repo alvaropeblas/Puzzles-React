@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, notification } from 'antd';
 import logo from '../../../public/images/Logo.png'
 import { useLogin } from '../../slices/userThunks';
@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const onFinish = async (values) => {
         const user = {
@@ -15,13 +16,14 @@ const Login = () => {
             password: values.password,
         };
         try {
+            setLoading(true);
             dispatch(useLogin(user))
                 .then(response => {
                     if (response) {
                         navigate('/puzzles-front/')
                         notification.success({
                             message: `Binevenido de nuevo!`,
-                            description: 'Disfute de la experiencia.',
+                            description: 'Disfrute la experiencia.',
                         });
                         return
                     }
@@ -29,6 +31,8 @@ const Login = () => {
                         message: 'Login erroneo',
                         description: 'Por favor, revise sus credenciales e intentelo de nuevo.',
                     });
+                }).finally(() => {
+                    setLoading(false);
                 });
         } catch (error) {
             console.error('Error during login:', error);
@@ -105,7 +109,12 @@ const Login = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" className='bg-SECONDARY' htmlType="submit" >
+                    <Button
+                        type="primary"
+                        className='bg-SECONDARY'
+                        htmlType="submit"
+                        loading={loading}
+                    >
                         Login
                     </Button>
                 </Form.Item>

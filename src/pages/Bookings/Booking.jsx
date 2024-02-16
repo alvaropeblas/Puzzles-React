@@ -14,13 +14,14 @@ const Booking = () => {
     const { user, token } = useSelector((state) => state.user)
     const fechasDisponibles = useSelector((state) => state.fechas.fechasDisponibles);
     const [horasDisponibles, setHorasDisponibles] = useState([]);
-
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         dispatch(useObtenerFechas())
         const timeoutId = setTimeout(() => {
             setIsVisible(true);
-        }, 0);
+            setLoading(false);
+        }, 2000);
 
         return () => clearTimeout(timeoutId);
     }, []);
@@ -62,8 +63,15 @@ const Booking = () => {
             <div className={`mb-4 text-center text-white ${isVisible && !formIsVisible ? '' : 'hidden'}`}>
                 <p className='text-black font-lilita font-bold'>Seleccione la fecha deseada</p>
             </div>
-            <div className='ml-10 w-[30%] transition-transform duration-1000'>
-                <Calendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} fullscreen={false} disabledDate={disabledDate} />
+            <div className={`ml-10 w-[30%] transition-transform duration-1000 ${loading ? 'skeleton-loading' : ''}`}>
+                {loading ? (
+                    
+                    <div className=' ml-16 w-[400px] h-[300px] bg-slate-400 animate-pulse  rounded'>
+                        
+                    </div>
+                ) : (
+                    <Calendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} fullscreen={false} disabledDate={disabledDate} />
+                )}
             </div>
             {formIsVisible && (
                 <div className='w-[40%] mt-10'>

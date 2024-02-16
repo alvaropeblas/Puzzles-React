@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input, Select, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCrearReserva } from '../../slices/bookingsThunks';
-import { useCrearTarjeta, useObtenerTarjeta } from '../../slices/userThunks';
+import { useCrearTarjeta, useObtenerTarjeta, useUserById } from '../../slices/userThunks';
 
 const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
     const { user, token, tarjetas } = useSelector((state) => state.user)
@@ -11,6 +11,8 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
     const [saveTarjeta, setSaveTarjeta] = useState()
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+
     const [selectedTarjeta, setSelectedTarjeta] = useState({
         num: '0000 0000 0000 0000',
         f_ven: '00/00',
@@ -25,12 +27,13 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
             hora: values.hora,
         };
         try {
+            setLoading(true)
             dispatch(useCrearReserva(token, reserva))
                 .then(response => {
                     if (response) {
                         notification.success({
                             message: 'Reserva Exitosa',
-                            description: `¡${user.name} has realizado una reserva para el ${selectedValue.format('YYYY-MM-DD')} a las ${values.hora}!`,
+                            description: `¡${user?.name} has realizado una reserva para el ${selectedValue.format('YYYY-MM-DD')} a las ${values.hora}!`,
                             placement: 'bottomRight',
                         });
                         navigate('/puzzles-front/')
@@ -49,6 +52,8 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                         description: `¡Algun error ha ocurrido lo sentimos pruebe de nuevo mas tarde`,
                         placement: 'bottomRight',
                     });
+                }).finally(() => {
+                    setLoading(false);
                 });
         } catch (error) {
             console.error('Error during reserva:', error);
@@ -58,6 +63,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
         setSaveTarjeta(e.target.checked);
     };
     useEffect(() => {
+        dispatch(useUserById(token))
         dispatch(useObtenerTarjeta(token))
     }, [])
     return (
@@ -229,7 +235,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     span: 16,
                 }}
             >
-                <Button type="primary" className='bg-SECONDARY ml-[38%] mt-4' htmlType="submit" >
+                <Button type="primary" className='bg-SECONDARY ml-[38%] mt-4' htmlType="submit" loading={loading}   >
                     Reservar
                 </Button>
             </Form.Item>

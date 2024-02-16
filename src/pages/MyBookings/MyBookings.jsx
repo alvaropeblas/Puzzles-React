@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useBorrarReserva, useObtenerReserva } from '../../slices/bookingsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,7 @@ const MyBookings = () => {
     const { token } = useSelector((state) => state.user);
     const { reservas } = useSelector((state) => state.reservas);
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
     const handleBorrarReserva = (idReserva) => {
         dispatch(useBorrarReserva(token, idReserva))
         dispatch(useObtenerReserva(token));
@@ -17,9 +18,18 @@ const MyBookings = () => {
         });
     }
 
+
     useEffect(() => {
-        dispatch(useObtenerReserva(token));
-    }, []);
+        const fetchData = async () => {
+            await dispatch(useObtenerReserva(token));
+            setLoading(false);
+        };
+
+        fetchData();
+
+        
+    }, [dispatch]);
+
     const columns = [
         {
             title: 'Fecha',
@@ -63,19 +73,23 @@ const MyBookings = () => {
 
     return (
         <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around '>
-            {reservas && reservas?.length > 0 ? (
+            {loading ? (
+                <div className='w-[400px] h-[200px] bg-slate-200 animate-pulse'>
 
-                <Table columns={columns} dataSource={reservas} pagination={{ pageSize: 3 }}  />
-
-            ) : (
-                <div className=''>
-                    <p className='mb-8'>No bookings available</p>
-                    <Link to="/puzzles-front/booking" >
-                        <Button type="primary" className='bg-SECONDARY'>
-                            Hacer una reserva
-                        </Button>
-                    </Link>
                 </div>
+            ) : (
+                reservas?.length > 0 ? (
+                    <Table columns={columns} dataSource={reservas} pagination={{ pageSize: 3 }} />
+                ) : (
+                    <div className=''>
+                        <p className='mb-8'>No bookings available</p>
+                        <Link to="/puzzles-front/booking">
+                            <Button type="primary" className='bg-SECONDARY'>
+                                Hacer una reserva
+                            </Button>
+                        </Link>
+                    </div>
+                )
             )}
         </div>
     );

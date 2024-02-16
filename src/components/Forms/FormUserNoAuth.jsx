@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Form, Input, Select, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { useCrearReservaOut } from '../../slices/bookingsThunks';
 const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const { menu } = useSelector((state) => state.menu)
 
     const onFinish = async (values) => {
@@ -21,6 +22,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
             fecha: selectedValue.format('YYYY-MM-DD'),
         };
         try {
+            setLoading(true);
             dispatch(useCrearReservaOut(reserva))
                 .then(response => {
                     if (response) {
@@ -37,6 +39,8 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                         description: `¡Algun error ha ocurrido lo sentimos pruebe de nuevo mas tarde`,
                         placement: 'bottomRight',
                     });
+                }).finally(() => {
+                    setLoading(false);
                 });
         } catch (error) {
             console.error('Error during reserva:', error);
@@ -205,7 +209,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                     span: 16,
                 }}
             >
-                <Button type="primary" className='bg-SECONDARY ml-[38%] mt-4' htmlType="submit">
+                <Button type="primary" className='bg-SECONDARY ml-[38%] mt-4' htmlType="submit" loading={loading}>
                     Reservar
                 </Button>
             </Form.Item>
