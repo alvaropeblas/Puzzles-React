@@ -20,20 +20,16 @@ const Login = () => {
                     if (response) {
                         navigate('/puzzles-front/')
                         notification.success({
-                            message: `Welcome back!`,
-                            description: 'We hope you enjoy your experience.',
+                            message: `Binevenido de nuevo!`,
+                            description: 'Disfute de la experiencia.',
                         });
                         return
                     }
                     notification.error({
-                        message: 'Login failed',
-                        description: 'Please check your email and password and try again.',
+                        message: 'Login erroneo',
+                        description: 'Por favor, revise sus credenciales e intentelo de nuevo.',
                     });
                 });
-
-
-
-
         } catch (error) {
             console.error('Error during login:', error);
         }
@@ -72,7 +68,7 @@ const Login = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your email!',
+                            message: 'Por favor, introduzca su correo!',
                         },
                     ]}
                 >
@@ -85,7 +81,7 @@ const Login = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: 'Por favor, introduzca su contraseña!',
                         },
                     ]}
                 >

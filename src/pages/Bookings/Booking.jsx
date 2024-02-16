@@ -11,7 +11,7 @@ const Booking = () => {
     const [selectedValue, setSelectedValue] = useState(() => dayjs('2024-02-25'));
     const [isVisible, setIsVisible] = useState(false);
     const [formIsVisible, setFormIsVisible] = useState(false);
-    const { user } = useSelector((state) => state.user)
+    const { user, token } = useSelector((state) => state.user)
     const fechasDisponibles = useSelector((state) => state.fechas.fechasDisponibles);
     const [horasDisponibles, setHorasDisponibles] = useState([]);
 
@@ -67,7 +67,7 @@ const Booking = () => {
             </div>
             {formIsVisible && (
                 <div className='w-[40%] mt-10'>
-                    {user ? <FormUserAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} /> : <FormUserNoAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} />}
+                    {token ? <FormUserAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} /> : <FormUserNoAuth selectedValue={selectedValue} horasDisponibles={horasDisponibles} />}
                 </div>
             )}
         </div>

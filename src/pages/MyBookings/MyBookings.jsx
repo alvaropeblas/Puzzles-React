@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useBorrarReserva, useObtenerReserva } from '../../slices/bookingsThunks';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Popconfirm, Space, Table } from 'antd';
+import { Button, Popconfirm, Space, Table, notification } from 'antd';
 
 const MyBookings = () => {
     const { token } = useSelector((state) => state.user);
@@ -11,6 +11,10 @@ const MyBookings = () => {
     const handleBorrarReserva = (idReserva) => {
         dispatch(useBorrarReserva(token, idReserva))
         dispatch(useObtenerReserva(token));
+        notification.success({
+            message: 'Reserva eliminada correctamente',
+            placement: 'bottomRight',
+        });
     }
 
     useEffect(() => {
@@ -61,7 +65,7 @@ const MyBookings = () => {
         <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around '>
             {reservas && reservas?.length > 0 ? (
 
-                <Table columns={columns} dataSource={reservas} />
+                <Table columns={columns} dataSource={reservas} pagination={{ pageSize: 3 }}  />
 
             ) : (
                 <div className=''>

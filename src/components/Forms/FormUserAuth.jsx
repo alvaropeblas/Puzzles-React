@@ -1,12 +1,14 @@
-import React from 'react'
-import { Button, Form, Input, Select, notification } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Button, Checkbox, Form, Input, Select, notification } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useCrearReserva } from '../../slices/bookingsThunks';
+import { useCrearTarjeta, useObtenerTarjeta } from '../../slices/userThunks';
 
 const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
-    const { user, token } = useSelector((state) => state.user)
+    const { user, token, tarjetas } = useSelector((state) => state.user)
     const menu = useSelector((state) => state.menu.menu)
+    const [saveTarjeta, setSaveTarjeta] = useState()
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const onFinish = async (values) => {
@@ -27,6 +29,14 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                             placement: 'bottomRight',
                         });
                         navigate('/puzzles-front/')
+                        if (saveTarjeta) {
+                            const card = {
+                                n_tarjeta: values.tarjeta,
+                                f_vencimiento: values.fecha_vencimiento,
+                                cvv: values.cvv,
+                            }
+                            dispatch(useCrearTarjeta(token, card))
+                        }
                         return
                     }
                     notification.error({
@@ -39,6 +49,12 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
             console.error('Error during reserva:', error);
         }
     };
+    const onChange = (e) => {
+        setSaveTarjeta(e.target.checked);
+    };
+    useEffect(() => {
+        dispatch(useObtenerTarjeta(token))
+    }, [])
     return (
         <Form
             name="basic"
@@ -72,6 +88,15 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 <Input />
             </Form.Item>
             <Form.Item
+                name="remember"
+                wrapperCol={{
+                    offset: 8,
+                    span: 16,
+                }}
+            >
+                <Checkbox onChange={onChange}>Guardar Tarjeta</Checkbox>
+            </Form.Item>
+            <Form.Item
                 label="Fecha venc."
                 required={true}
                 name="fecha_vencimiento"
@@ -101,6 +126,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                 label="Comensales"
                 required={true}
                 name="n_personas"
+
                 rules={[
                     {
                         required: true,
@@ -108,7 +134,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     },
                 ]}
             >
-                <Input />
+                <Input type='number' style={{ width: 160 }} />
             </Form.Item>
             <Form.Item
                 label="Menu"
@@ -162,7 +188,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     },
                 ]}
             >
-                <Input />
+                <Input type='textarea' />
             </Form.Item>
             <Form.Item
                 wrapperCol={{

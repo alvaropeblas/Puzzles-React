@@ -145,19 +145,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                     },
                 ]}
             >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                label="Alergias"
-                name="alergias"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Por favor, ingrese sus alergias.',
-                    },
-                ]}
-            >
-                <Input />
+                <Input type='number' style={{ width: 160 }} />
             </Form.Item>
             <Form.Item
                 label="Menu"
@@ -199,7 +187,18 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                     ))}
                 </Select>
             </Form.Item>
-
+            <Form.Item
+                label="Alergias"
+                name="alergias"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Por favor, ingrese sus alergias.',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
             <Form.Item
                 wrapperCol={{
                     offset: 8,
