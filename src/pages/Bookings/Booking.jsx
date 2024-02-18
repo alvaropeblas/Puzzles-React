@@ -59,7 +59,7 @@ const Booking = () => {
     };
 
     return (
-        <div className='bg-TERCIARY h-screen w-screen flex items-center justify-center'>
+        <div className='bg-T_COLOR h-screen w-screen flex items-center justify-center'>
             <div className={`mb-4 text-center text-white ${isVisible && !formIsVisible ? '' : 'hidden'}`}>
                 <p className='text-black font-lilita font-bold'>Seleccione la fecha deseada</p>
             </div>

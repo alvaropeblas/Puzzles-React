@@ -18,7 +18,7 @@ export const useUserById = (token) => {
     return async (dispatch) => {
         try {
             const response = await userByID(token);
-            dispatch(setUser({ user: response.user, token: token}));
+            dispatch(setUser({ user: response, token: token }));
             return response.status
         } catch (error) {
             console.error('Login failed:', error.message);
@@ -29,7 +29,8 @@ export const useUserById = (token) => {
 export const useRegister = (userData) => {
     return async (dispatch) => {
         try {
-            const user = await userRegister(userData);
+            const response = await userRegister(userData);
+            return response
         } catch (error) {
             console.error('Login failed:', error.message);
         }

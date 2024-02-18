@@ -18,7 +18,7 @@ const LogOut = () => {
 
     return (
         <Menu
-            className='lg:w-[100%] w-[10%] lg:mb-10  mt-2 rounded font-lilita bg-SECONDARY'
+            className='lg:w-[100%] w-[10%] lg:mb-10  mt-2 rounded font-lilita bg-S_COLOR'
             mode="vertical"
             style={{
                 color: 'red'

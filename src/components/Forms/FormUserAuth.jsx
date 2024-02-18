@@ -33,7 +33,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     if (response) {
                         notification.success({
                             message: 'Reserva Exitosa',
-                            description: `¡${user?.name} has realizado una reserva para el ${selectedValue.format('YYYY-MM-DD')} a las ${values.hora}!`,
+                            description: `¡${user.name} has realizado una reserva para el ${selectedValue.format('YYYY-MM-DD')} a las ${values.hora}!`,
                             placement: 'bottomRight',
                         });
                         navigate('/puzzles-front/')
@@ -235,7 +235,7 @@ const FormUserAuth = ({ selectedValue, horasDisponibles }) => {
                     span: 16,
                 }}
             >
-                <Button type="primary" className='bg-SECONDARY ml-[38%] mt-4' htmlType="submit" loading={loading}   >
+                <Button type="primary" className='bg-S_COLOR ml-[38%] mt-4' htmlType="submit" loading={loading}   >
                     Reservar
                 </Button>
             </Form.Item>

@@ -34,7 +34,7 @@ const MenuCardUno = ({ title, content, handleMenuClick, menuType }) => {
                 <Link to="/puzzles-front/booking">
                     <Button
                         type="primary"
-                        className='bg-SECONDARY mt-9'
+                        className='bg-S_COLOR mt-9'
                         onClick={() => handleMenuClick(menuType)}
                     >
                         Reservar
@@ -74,7 +74,7 @@ const MenuCardDos = ({ title, content, handleMenuClick, menuType }) => {
                 <Link to="/puzzles-front/booking">
                     <Button
                         type="primary"
-                        className='bg-SECONDARY mt-9'
+                        className='bg-S_COLOR mt-9'
                         onClick={() => handleMenuClick(menuType)}
                     >
                         Reservar
@@ -115,7 +115,7 @@ const MenuCardTres = ({ title, content, handleMenuClick, menuType }) => {
                 <Link to="/puzzles-front/booking">
                     <Button
                         type="primary"
-                        className='bg-SECONDARY mt-9'
+                        className='bg-S_COLOR mt-9'
                         onClick={() => handleMenuClick(menuType)}
                     >
                         Reservar
@@ -134,7 +134,7 @@ const Menu = () => {
         navigate(`/puzzles-front/bookings`);
     }
     return (
-        <div className='bg-TERCIARY h-screen w-screen flex justify-around items-center text-center'>
+        <div className='bg-T_COLOR h-screen w-screen flex justify-around items-center text-center'>
             <Row gutter={30} style={{marginLeft: '5%'}}>
                 <Col xs={24} sm={12} md={8} lg={8} xl={8} span={8}>
                     <MenuCardUno

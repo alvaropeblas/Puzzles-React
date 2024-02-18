@@ -72,7 +72,7 @@ const MyBookings = () => {
 
 
     return (
-        <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around '>
+        <div className='bg-T_COLOR h-screen w-screen flex items-center justify-around '>
             {loading ? (
                 <div className='w-[400px] h-[200px] bg-slate-200 animate-pulse'>
 
@@ -84,7 +84,7 @@ const MyBookings = () => {
                     <div className=''>
                         <p className='mb-8'>No bookings available</p>
                         <Link to="/puzzles-front/booking">
-                            <Button type="primary" className='bg-SECONDARY'>
+                            <Button type="primary" className='bg-S_COLOR'>
                                 Hacer una reserva
                             </Button>
                         </Link>

@@ -209,7 +209,7 @@ const FormUserNoAuth = ({ selectedValue, horasDisponibles }) => {
                     span: 16,
                 }}
             >
-                <Button type="primary" className='bg-SECONDARY ml-[38%] mt-4' htmlType="submit" loading={loading}>
+                <Button type="primary" className='bg-S_COLOR ml-[38%] mt-4' htmlType="submit" loading={loading}>
                     Reservar
                 </Button>
             </Form.Item>

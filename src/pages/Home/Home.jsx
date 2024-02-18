@@ -12,7 +12,7 @@ function Home() {
     }, []);
     return (
         <>
-            <div className='bg-TERCIARY h-screen w-screen'>
+            <div className='bg-T_COLOR h-screen w-screen'>
                 <div className='flex flex-col items-center justify-center h-screen'>
                     <div className='flex items-center mb-4'>
                         <h1 className={`text-4xl font-lilita transition-transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-[-2em] opacity-0'}`}>W<label className='text-BUTTON_COLOR'>e</label>lcom<label className='text-BUTTON_COLOR'>e</label> to </h1>
@@ -23,7 +23,7 @@ function Home() {
                     </div>
 
                     <Link to="/puzzles-front/booking">
-                        <Button type="primary" className='bg-SECONDARY ml-8'>
+                        <Button type="primary" className='bg-S_COLOR ml-8'>
                             Hacer una reserva
                         </Button>
                     </Link>

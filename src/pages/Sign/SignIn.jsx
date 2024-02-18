@@ -42,17 +42,26 @@ const SignIn = () => {
             email: email,
             password: password
         }
-        await dispatch(useRegister(user)).finally(() => {
-            setLoading(false);
-        });
-        notification.success({
-            message: 'Registrado!',
-            description: 'Bienvenido a Puzzles.',
-        });
-        navigate('/puzzles-front/')
+        dispatch(useRegister(user))
+                .then(response => {
+                    if (response) {
+                        navigate('/puzzles-front/')
+                        notification.success({
+                            message: 'Registrado!',
+                            description: 'Bienvenido a Puzzles.',
+                        });
+                        return
+                    }
+                    notification.error({
+                        message: 'Registro incompleto',
+                        description: 'Por favor, revise sus credenciales e intentelo de nuevo.',
+                    });
+                }).finally(() => {
+                    setLoading(false);
+                });
     }
     return (
-        <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around flex-col'>
+        <div className='bg-T_COLOR h-screen w-screen flex items-center justify-around flex-col'>
             <div className='h-[10px] w-[200px] ml-14'>
                 <img src={logo} alt="" />
             </div>
@@ -103,6 +112,7 @@ const SignIn = () => {
                 <Form.Item
                     label="Email"
                     name="email"
+                    type="email"
                     rules={[
                         {
                             required: true,
@@ -133,7 +143,7 @@ const SignIn = () => {
                         span: 16,
                     }}
                 >
-                    <Button type="primary" className='bg-SECONDARY' htmlType="submit" onClick={handleRegister}  loading={loading}>
+                    <Button type="primary" className='bg-S_COLOR' htmlType="submit" onClick={handleRegister}  loading={loading}>
                         Sign in
                     </Button>
                 </Form.Item>

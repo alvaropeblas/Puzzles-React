@@ -41,7 +41,7 @@ const Login = () => {
 
 
     return (
-        <div className='bg-TERCIARY h-screen w-screen flex items-center justify-around flex-col'>
+        <div className='bg-T_COLOR h-screen w-screen flex items-center justify-around flex-col'>
             <div className='h-[10px] w-[200px] ml-14'>
                 <img src={logo} alt="" />
             </div>
@@ -69,6 +69,7 @@ const Login = () => {
                 <Form.Item
                     label="Email"
                     name="email"
+                    type="email"
                     rules={[
                         {
                             required: true,
@@ -111,7 +112,7 @@ const Login = () => {
                 >
                     <Button
                         type="primary"
-                        className='bg-SECONDARY'
+                        className='bg-S_COLOR'
                         htmlType="submit"
                         loading={loading}
                     >
