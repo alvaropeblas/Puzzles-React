@@ -20,4 +20,3 @@ export default {
   },
   plugins: [],
 }
-'#BDD5EA'
