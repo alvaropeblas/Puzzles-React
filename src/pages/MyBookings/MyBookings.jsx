@@ -27,7 +27,7 @@ const MyBookings = () => {
 
         fetchData();
 
-        
+
     }, [dispatch]);
 
     const columns = [
@@ -74,8 +74,8 @@ const MyBookings = () => {
     return (
         <div className='bg-T_COLOR h-screen w-screen flex items-center justify-around '>
             {loading ? (
-                <div className='w-[400px] h-[200px] bg-slate-200 animate-pulse'>
-
+                <div className=' flex justify-center items-center w-[400px] h-[200px] bg-slate-400 animate-pulse'>
+                    <p className='text-white animate-pulse font-lilita font-semibold'>Buscando tus reservas</p>
                 </div>
             ) : (
                 reservas?.length > 0 ? (

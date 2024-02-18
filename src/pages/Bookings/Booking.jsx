@@ -65,9 +65,9 @@ const Booking = () => {
             </div>
             <div className={`ml-10 w-[30%] transition-transform duration-1000 ${loading ? 'skeleton-loading' : ''}`}>
                 {loading ? (
-                    
-                    <div className=' ml-16 w-[400px] h-[300px] bg-slate-400 animate-pulse  rounded'>
 
+                    <div className='flex justify-center items-center ml-16 w-[400px] h-[300px] bg-slate-400 animate-pulse  rounded'>
+                        <p className='text-white animate-pulse font-lilita font-semibold'>Cargando dias disponibles</p>
                     </div>
                 ) : (
                     <Calendar value={value} onSelect={onSelect} onPanelChange={onPanelChange} fullscreen={false} disabledDate={disabledDate} />
